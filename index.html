@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🌸 Premium Memory Match Game 🌸</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+
+    background:
+    linear-gradient(
+    135deg,
+    #ffdde1,
+    #ee9ca7,
+    #c9d6ff,
+    #fbc2eb,
+    #a6c1ee,
+    #fad0c4
+    );
+
+    background-size:600% 600%;
+    animation:premiumBG 15s ease infinite;
+}
+
+/* PREMIUM ANIMATION */
+
+@keyframes premiumBG{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
+}
+
+/* SHINY OVERLAY */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(circle at top left,
+    rgba(255,255,255,0.7),
+    transparent 30%),
+
+    radial-gradient(circle at bottom right,
+    rgba(255,255,255,0.4),
+    transparent 35%),
+
+    radial-gradient(circle at center,
+    rgba(255,255,255,0.2),
+    transparent 40%);
+
+    z-index:-2;
+}
+
+/* PREMIUM GLOW */
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+    repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,0.03),
+    rgba(255,255,255,0.03) 2px,
+    transparent 2px,
+    transparent 10px
+    );
+
+    animation:shine 12s linear infinite;
+
+    z-index:-1;
+}
+
+@keyframes shine{
+
+    from{
+        transform:translateX(-10%);
+    }
+
+    to{
+        transform:translateX(10%);
+    }
+
+}
+
+/* FLOATING LIGHTS */
+
+.light{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(15px);
+    opacity:0.5;
+    z-index:-1;
+    animation:floatLight 8s infinite ease-in-out;
+}
+
+.light1{
+    width:250px;
+    height:250px;
+    background:#ff9ecf;
+    top:5%;
+    left:5%;
+}
+
+.light2{
+    width:220px;
+    height:220px;
+    background:#8fdcff;
+    bottom:10%;
+    right:5%;
+}
+
+.light3{
+    width:180px;
+    height:180px;
+    background:#ffe28f;
+    top:60%;
+    left:40%;
+}
+
+.light4{
+    width:200px;
+    height:200px;
+    background:#c2ff8f;
+    top:15%;
+    right:25%;
+}
+
+.light5{
+    width:160px;
+    height:160px;
+    background:#d89fff;
+    bottom:20%;
+    left:20%;
+}
+
+@keyframes floatLight{
+
+    0%{
+        transform:
+        translateY(0px)
+        scale(1);
+    }
+
+    50%{
+        transform:
+        translateY(-30px)
+        scale(1.08);
+    }
+
+    100%{
+        transform:
+        translateY(0px)
+        scale(1);
+    }
+
+}
+
+/* PAGE */
+
+.page{
+    display:none;
+    min-height:100vh;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    padding:20px;
+}
+
+.active{
+    display:flex;
+}
+
+/* GLASS */
+
+.glass{
+    width:95%;
+    max-width:1300px;
+
+    background:
+    rgba(255,255,255,0.28);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:40px;
+
+    padding:40px;
+
+    text-align:center;
+
+    box-shadow:
+    0 10px 40px rgba(0,0,0,0.15);
+
+    border:
+    1px solid rgba(255,255,255,0.35);
+}
+
+/* TITLE */
+
+.title{
+    font-size:62px;
+    font-weight:700;
+
+    background:
+    linear-gradient(
+    45deg,
+    #ff4f9a,
+    #7b61ff,
+    #00bfff
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    margin-bottom:15px;
+}
+
+.sub{
+    font-size:22px;
+    color:#555;
+    margin-bottom:25px;
+}
+
+/* INPUT */
+
+input,
+select{
+
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:18px;
+    margin:12px 0;
+    font-size:16px;
+    background:white;
+    outline:none;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,0.08);
+
+}
+
+/* BUTTON */
+
+button{
+
+    padding:16px 40px;
+    border:none;
+    border-radius:50px;
+
+    background:
+    linear-gradient(
+    45deg,
+    #ff5fa2,
+    #ff9966
+    );
+
+    color:white;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+    margin-top:20px;
+
+    box-shadow:
+    0 8px 20px rgba(255,95,162,0.3);
+
+}
+
+button:hover{
+
+    transform:
+    translateY(-4px)
+    scale(1.05);
+
+}
+
+/* TOP BAR */
+
+#topBar{
+
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+
+}
+
+.player{
+
+    min-width:240px;
+
+    background:white;
+
+    padding:18px;
+
+    border-radius:25px;
+
+    font-size:21px;
+    font-weight:600;
+
+    box-shadow:
+    0 6px 15px rgba(0,0,0,0.08);
+
+    transition:0.3s;
+
+}
+
+.activeTurn{
+
+    border:3px solid #ff4f9a;
+
+    transform:scale(1.05);
+
+}
+
+/* INFO */
+
+#gameInfo{
+
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+
+}
+
+.infoBox{
+
+    background:white;
+
+    padding:14px 25px;
+
+    border-radius:20px;
+
+    font-size:20px;
+    font-weight:600;
+
+    box-shadow:
+    0 4px 10px rgba(0,0,0,0.08);
+
+}
+
+/* TURN */
+
+#turn{
+
+    font-size:30px;
+    color:#ff4f9a;
+    font-weight:700;
+    margin-bottom:25px;
+
+}
+
+/* BOARD */
+
+#board{
+
+    display:grid;
+    gap:18px;
+    justify-content:center;
+
+}
+
+/* CARD */
+
+.card{
+
+    width:135px;
+    height:90px;
+
+    position:relative;
+
+    transform-style:preserve-3d;
+
+    transition:transform 0.6s;
+
+    cursor:pointer;
+
+}
+
+.card.flip{
+    transform:rotateY(180deg);
+}
+
+.front,
+.back{
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    border-radius:24px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    backface-visibility:hidden;
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,0.1);
+
+}
+
+.front{
+
+    background:
+    linear-gradient(
+    135deg,
+    #ff9ecf,
+    #ffd39f
+    );
+
+    color:white;
+
+    font-size:34px;
+
+}
+
+.back{
+
+    background:white;
+
+    transform:rotateY(180deg);
+
+    font-size:48px;
+
+}
+
+.matched .back{
+
+    background:
+    linear-gradient(
+    135deg,
+    #82ffc8,
+    #8fd3ff
+    );
+
+    animation:matched 1s infinite alternate;
+
+}
+
+@keyframes matched{
+
+    from{
+        transform:
+        rotateY(180deg)
+        scale(1);
+    }
+
+    to{
+        transform:
+        rotateY(180deg)
+        scale(1.08);
+    }
+
+}
+
+/* SCORE PAGE */
+
+#winnerName{
+
+    font-size:50px;
+    color:#ff4f9a;
+    margin-bottom:20px;
+
+}
+
+#finalScore{
+
+    font-size:28px;
+    line-height:50px;
+    color:#444;
+
+}
+
+/* CONFETTI */
+
+.confetti{
+
+    position:fixed;
+
+    width:12px;
+    height:12px;
+
+    top:-20px;
+
+    animation:fall linear forwards;
+
+}
+
+@keyframes fall{
+
+    to{
+
+        transform:
+        translateY(110vh)
+        rotate(720deg);
+
+    }
+
+}
+
+/* MOBILE */
+
+@media(max-width:1100px){
+
+    .card{
+        width:95px;
+        height:70px;
+    }
+
+    .back{
+        font-size:36px;
+    }
+
+    .title{
+        font-size:42px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LIGHTS -->
+
+<div class="light light1"></div>
+<div class="light light2"></div>
+<div class="light light3"></div>
+<div class="light light4"></div>
+<div class="light light5"></div>
+
+<!-- HOME PAGE -->
+
+<div class="page active" id="homePage">
+
+    <div class="glass">
+
+        <div class="title">
+            🧠 Memory Match
+        </div>
+
+        <div class="sub">
+            ✨ Premium Multiplayer Game ✨
+        </div>
+
+        <button onclick="showNamePage()">
+            Start Game 🚀
+        </button>
+
+    </div>
+
+</div>
+
+<!-- SETUP PAGE -->
+
+<div class="page" id="namePage">
+
+    <div class="glass">
+
+        <div class="title">
+            🎮 Game Setup
+        </div>
+
+        <select id="players" onchange="togglePlayers()">
+
+            <option value="">
+                👥 Select Players
+            </option>
+
+            <option value="1">
+                👤 Single Player
+            </option>
+
+            <option value="2">
+                👥 Two Players
+            </option>
+
+        </select>
+
+        <div id="player1Input" style="display:none;">
+
+            <input
+            type="text"
+            id="p1"
+            placeholder="👦 Enter Player 1 Name">
+
+        </div>
+
+        <div id="player2Input" style="display:none;">
+
+            <input
+            type="text"
+            id="p2"
+            placeholder="👧 Enter Player 2 Name">
+
+        </div>
+
+        <select id="category">
+
+            <option value="">
+                🎴 Select Category
+            </option>
+
+            <option value="food">
+                🍕 Food
+            </option>
+
+            <option value="animals">
+                🐼 Animals
+            </option>
+
+            <option value="vehicles">
+                🚗 Vehicles
+            </option>
+
+            <option value="colors">
+                🌈 Colors
+            </option>
+
+            <option value="things">
+                🎮 Things
+            </option>
+
+            <option value="mixed">
+                ✨ Mixed
+            </option>
+
+        </select>
+
+        <select id="mode">
+
+            <option value="">
+                🎯 Select Mode
+            </option>
+
+            <option value="easy">
+                😊 Easy Mode
+            </option>
+
+            <option value="medium">
+                😎 Medium Mode
+            </option>
+
+            <option value="hard">
+                🔥 Hard Mode
+            </option>
+
+        </select>
+
+        <button onclick="startGame()">
+            Play Now 🎯
+        </button>
+
+    </div>
+
+</div>
+
+<!-- GAME PAGE -->
+
+<div class="page" id="gamePage">
+
+    <div id="topBar">
+
+        <div class="player"
+        id="player1Box"></div>
+
+        <div class="player"
+        id="player2Box"></div>
+
+    </div>
+
+    <div id="turn"></div>
+
+    <div id="gameInfo">
+
+        <div class="infoBox"
+        id="timer">
+            ⏰ 0s
+        </div>
+
+        <div class="infoBox"
+        id="moves">
+            🎯 Moves : 0
+        </div>
+
+        <div class="infoBox"
+        id="combo">
+            ⚡ Combo : 0
+        </div>
+
+    </div>
+
+    <div id="board"></div>
+
+</div>
+
+<!-- SCORE PAGE -->
+
+<div class="page" id="scorePage">
+
+    <div class="glass">
+
+        <div class="title">
+            🏆 Game Over
+        </div>
+
+        <div id="winnerName"></div>
+
+        <div id="finalScore"></div>
+
+        <button onclick="location.reload()">
+            🔄 Play Again
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+const categories = {
+
+food:[
+"🍕","🍔","🍟","🍩",
+"🍎","🍓","🍇","🍒",
+"🌮","🍿","🍰","🍪",
+"🍉","🍌","🥝","🍭"
+],
+
+animals:[
+"🐶","🐱","🐼","🦁",
+"🐸","🐵","🐯","🐰",
+"🐨","🦄","🐷","🐻",
+"🐔","🐧","🦊","🐮"
+],
+
+vehicles:[
+"🚗","🚕","🚙","🚌",
+"🚑","🚓","🏎️","🚜",
+"🚲","🛵","✈️","🚀",
+"⛵","🚂","🛻","🚁"
+],
+
+colors:[
+"🟥","🟧","🟨","🟩",
+"🟦","🟪","⬛","⬜",
+"🟫","🔴","🔵","🟢",
+"🟣","🟠","🟡","⚫"
+],
+
+things:[
+"💎","🎮","🎧","📱",
+"⌚","💡","🎁","🧸",
+"📷","🖥️","🛒","🎸",
+"📚","🧩","🕹️","🎲"
+],
+
+mixed:[
+"🐼","🍕","🚗","🎮",
+"⚽","🌈","🎧","🍩",
+"🚀","🦄","🍔","💎",
+"🐱","⚡","🎲","🍓"
+]
+
+};
+
+let cards = [];
+let totalPairs = 8;
+
+let firstCard = null;
+let secondCard = null;
+let lockBoard = false;
+
+let matches = 0;
+
+let player1 = "";
+let player2 = "";
+
+let score1 = 0;
+let score2 = 0;
+
+let currentPlayer = 1;
+
+let movesCount = 0;
+let seconds = 0;
+let combo = 0;
+
+let totalPlayers = 2;
+
+let timer;
+
+function showNamePage(){
+
+    homePage.classList.remove("active");
+
+    namePage.classList.add("active");
+
+}
+
+function togglePlayers(){
+
+    const players =
+    document.getElementById("players").value;
+
+    if(players === "1"){
+
+        player1Input.style.display = "block";
+
+        player2Input.style.display = "none";
+
+    }
+
+    else if(players === "2"){
+
+        player1Input.style.display = "block";
+
+        player2Input.style.display = "block";
+
+    }
+
+}
+
+function startGame(){
+
+    const players =
+    document.getElementById("players").value;
+
+    const category =
+    document.getElementById("category").value;
+
+    const mode =
+    document.getElementById("mode").value;
+
+    if(players === ""){
+
+        alert("Please Select Players 👥");
+
+        return;
+
+    }
+
+    if(category === ""){
+
+        alert("Please Select Category 🎴");
+
+        return;
+
+    }
+
+    if(mode === ""){
+
+        alert("Please Select Mode 🎯");
+
+        return;
+
+    }
+
+    totalPlayers = Number(players);
+
+    player1 =
+    document.getElementById("p1").value
+    || "Player 1";
+
+    player2 =
+    document.getElementById("p2").value
+    || "Player 2";
+
+    if(totalPlayers === 1){
+
+        player2Box.style.display = "none";
+
+    }
+
+    else{
+
+        player2Box.style.display = "block";
+
+    }
+
+    if(mode === "easy"){
+
+        totalPairs = 8;
+
+        board.style.gridTemplateColumns =
+        "repeat(4,135px)";
+
+    }
+
+    else if(mode === "medium"){
+
+        totalPairs = 12;
+
+        board.style.gridTemplateColumns =
+        "repeat(6,135px)";
+
+    }
+
+    else{
+
+        totalPairs = 16;
+
+        board.style.gridTemplateColumns =
+        "repeat(8,135px)";
+
+    }
+
+    let selected =
+    categories[category]
+    .slice(0,totalPairs);
+
+    cards = [...selected,...selected];
+
+    cards.sort(()=>0.5 - Math.random());
+
+    namePage.classList.remove("active");
+
+    gamePage.classList.add("active");
+
+    updateScore();
+
+    startTimer();
+
+    board.innerHTML = "";
+
+    cards.forEach((emoji)=>{
+
+        const card =
+        document.createElement("div");
+
+        card.classList.add("card");
+
+        card.innerHTML = `
+        <div class="front">❓</div>
+        <div class="back">${emoji}</div>
+        `;
+
+        card.dataset.emoji = emoji;
+
+        card.addEventListener(
+        "click",
+        ()=>flipCard(card)
+        );
+
+        board.appendChild(card);
+
+    });
+
+}
+
+function flipCard(card){
+
+    if(lockBoard) return;
+
+    if(card.classList.contains("flip"))
+    return;
+
+    card.classList.add("flip");
+
+    if(firstCard == null){
+
+        firstCard = card;
+
+        return;
+
+    }
+
+    secondCard = card;
+
+    lockBoard = true;
+
+    movesCount++;
+
+    document.getElementById("moves")
+    .innerHTML =
+    `🎯 Moves : ${movesCount}`;
+
+    if(firstCard.dataset.emoji ===
+    secondCard.dataset.emoji){
+
+        firstCard.classList.add("matched");
+
+        secondCard.classList.add("matched");
+
+        combo++;
+
+        document.getElementById("combo")
+        .innerHTML =
+        `⚡ Combo : ${combo}`;
+
+        if(currentPlayer === 1){
+
+            score1 += combo;
+
+        }
+
+        else{
+
+            score2 += combo;
+
+        }
+
+        matches++;
+
+        updateScore();
+
+        resetCards();
+
+        if(matches === totalPairs){
+
+            clearInterval(timer);
+
+            createConfetti();
+
+            setTimeout(showWinner,1000);
+
+        }
+
+    }
+
+    else{
+
+        combo = 0;
+
+        document.getElementById("combo")
+        .innerHTML =
+        `⚡ Combo : 0`;
+
+        setTimeout(()=>{
+
+            firstCard.classList.remove("flip");
+
+            secondCard.classList.remove("flip");
+
+            if(totalPlayers === 2){
+
+                currentPlayer =
+                currentPlayer === 1 ? 2 : 1;
+
+            }
+
+            updateScore();
+
+            resetCards();
+
+        },900);
+
+    }
+
+}
+
+function resetCards(){
+
+    firstCard = null;
+
+    secondCard = null;
+
+    lockBoard = false;
+
+}
+
+function updateScore(){
+
+    player1Box.innerHTML =
+    `👦 ${player1}<br>⭐ ${score1}`;
+
+    if(totalPlayers === 2){
+
+        player2Box.innerHTML =
+        `👧 ${player2}<br>⭐ ${score2}`;
+
+    }
+
+    player1Box.classList.remove("activeTurn");
+
+    player2Box.classList.remove("activeTurn");
+
+    if(totalPlayers === 2){
+
+        if(currentPlayer === 1){
+
+            player1Box.classList.add("activeTurn");
+
+        }
+
+        else{
+
+            player2Box.classList.add("activeTurn");
+
+        }
+
+        let current =
+        currentPlayer === 1
+        ? player1
+        : player2;
+
+        turn.innerHTML =
+        `🎯 Turn : ${current}`;
+
+    }
+
+    else{
+
+        player1Box.classList.add("activeTurn");
+
+        turn.innerHTML =
+        `🎮 Single Player Mode`;
+
+    }
+
+}
+
+function startTimer(){
+
+    timer = setInterval(()=>{
+
+        seconds++;
+
+        document.getElementById("timer")
+        .innerHTML =
+        `⏰ ${seconds}s`;
+
+    },1000);
+
+}
+
+function showWinner(){
+
+    gamePage.classList.remove("active");
+
+    scorePage.classList.add("active");
+
+    let result = "";
+
+    if(totalPlayers === 1){
+
+        result =
+        `🏆 ${player1} Completed The Game`;
+
+    }
+
+    else{
+
+        if(score1 > score2){
+
+            result =
+            `👑 ${player1} Wins`;
+
+        }
+
+        else if(score2 > score1){
+
+            result =
+            `👑 ${player2} Wins`;
+
+        }
+
+        else{
+
+            result =
+            `🤝 Draw Match`;
+
+        }
+
+    }
+
+    winnerName.innerHTML = result;
+
+    finalScore.innerHTML = `
+    ⭐ ${player1} : ${score1}<br>
+    ${totalPlayers===2 ? `⭐ ${player2} : ${score2}<br>` : ""}
+    🎯 Moves : ${movesCount}<br>
+    ⏰ Time : ${seconds}s
+    `;
+
+}
+
+function createConfetti(){
+
+    for(let i=0;i<150;i++){
+
+        const confetti =
+        document.createElement("div");
+
+        confetti.classList.add("confetti");
+
+        confetti.style.left =
+        Math.random()*100 + "vw";
+
+        confetti.style.background =
+        `hsl(${Math.random()*360},100%,50%)`;
+
+        confetti.style.animationDuration =
+        Math.random()*3 + 2 + "s";
+
+        document.body.appendChild(confetti);
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
